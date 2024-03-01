@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/editor.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/editor.css">
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
-    <script src="./js/firebase.js" defer></script>
-    <script src="./js/editor.js" defer></script>
+    <!-- Firebase Authentication UI Connection -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="../js/firebase.js" defer></script>
+    <script src="../js/editor.js" defer></script>
     <title>Blog - Editor Page</title>
 </head>
 <body>
     <div class="banner">
         <input type="file" id="banner-upload" accept="image/*" hidden>
-        <label for="banner-upload" class="banner-upload-btn"><img src="./images/upload.png" alt="Upload Banner"></label>
+        <label for="banner-upload" class="banner-upload-btn"><img src="../images/upload.png" alt="Upload Banner"></label>
     </div>
 
     <div class="blog">
-        <textarea type="text" name="" id="" class="title" placeholder="Blog Title"></textarea>
-        <textarea type="text" name="" id="" class="article" placeholder="Start Writing Here"></textarea>
+        <textarea type="text" name="textarea-title" id="textarea-title" class="title" placeholder="Blog Title"></textarea>
+        <textarea type="text" name="textarea-article" id="textarea-article" class="article" placeholder="Start Writing Here"></textarea>
     </div>
 
     <div class="blog-options">

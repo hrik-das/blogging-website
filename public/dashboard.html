@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"/>
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="./css/editor.css">
-    <link rel="stylesheet" href="./css/blog.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-firestore.js"></script>
     <!-- Firebase Authentication UI Connection -->
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
     <script src="./js/firebase.js" defer></script>
-    <script src="./js/index.js" defer></script>
-    <script src="./js/blog.js" defer></script>
+    <script src="./js/dashboard.js" defer></script>
     <script src="./js/nav.js" defer></script>
-    <title>Blog : </title>
+    <title>Dashboard</title>
 </head>
 <body>
+    <!-- Login Button -->
+    <div class="login">
+        <div id="loginUI"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <img src="./images/logo.png" alt="" class="logo">
@@ -26,23 +31,17 @@
         </ul>
     </nav>
 
-    <div class="banner"></div>
-
-    <div class="blog">
-        <h1 class="title"></h1>
-        <p class="published"><span>Published at - </span></p>
-        <a href="" class="btn" id="edit-blog-btn">Edit Blog</a>
-        <div class="article"></div>
-    </div>
-
-    <h1 class="sub-heading">Read More</h1>
+    <!-- Dashboard -->
+    <div class="heading">Your Blogs</div>
     <!-- Blog Section -->
     <section class="blogs-section">
         <!-- <div class="blog-card">
             <img src="./images/header.png" alt="" class="blog-image">
             <h1 class="blog-title">Lorem ipsum dolor sit amet.</h1>
             <p class="blog-overview">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis, autem fugiat impedit vitae quae mollitia ratione porro explicabo rerum? Iusto. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</p>
-            <a href="/" class="btn dark">Read More</a>
+            <a href="/" class="btn dark">Read</a>
+            <a href="/" class="btn grey">Edit</a>
+            <a href="/" class="btn danger">Delete</a>
         </div> -->
     </section>
 </body>

@@ -49,16 +49,21 @@ let months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", 
 
 publishBtn.addEventListener("click", () => {
     if(articleField.value.length && blogTitleField.value.length){
-        // Generating ID
-        let letters = "abcdefghijklmnopqrstuvwxyz";
-        let blogTitle = blogTitleField.value.split(" ").join("-");
-        let id = "";
-        for(let i=0; i<4; i++){
-            id = id + letters[Math.floor(Math.random() * letters.length)];
+        let docName;
+        if(blogID[0] == "editor"){
+            // Generating ID
+            let letters = "abcdefghijklmnopqrstuvwxyz";
+            let blogTitle = blogTitleField.value.split(" ").join("-");
+            let id = "";
+            for(let i=0; i<4; i++){
+                id = id + letters[Math.floor(Math.random() * letters.length)];
+            }
+            // Setting Up DocName
+            docName = `${blogTitle}-${id}`;
+        }else{
+            docName = decodeURI(blogID[0]);
         }
 
-        // Setting Up DocName
-        let docName = `${blogTitle}-${id}`;
         let date = new Date();    // For Publish at Info
 
         // Access Firestore With "db" Variable
@@ -66,11 +71,39 @@ publishBtn.addEventListener("click", () => {
             title: blogTitleField.value,
             article: articleField.value,
             bannerImage: bannerPath,
-            publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+            publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`,
+            author: auth.currentUser.email.split("@")[0]    // This will Return Logged In User Email Name [example]@gmail.com
         }).then(() => {
             location.href = `/${docName}`;
         }).catch((error) => {
             console.error(error);
         });
     }
-})
+});
+
+// Checking for User Logged In or Not
+auth.onAuthStateChanged((user) => {
+    if(!user){
+        location.replace("/admin");
+    }
+});
+
+// Checking for Existing Blog Edits
+let blogID = location.pathname.split("/");
+blogID.shift();     // It will Remove First Elements Which is Empty from the Array
+
+if(blogID[0] != "editor"){
+    // Means We are In Existing Blog Edit Route
+    let docRef = db.collection("blogs").doc(decodeURI(blogID[0]));
+    docRef.get().then((doc) => {
+        if(doc.exists){
+            let data = doc.data();
+            bannerPath = data.bannerImage;
+            banner.style.backgroundImage = `url(${bannerPath})`;
+            blogTitleField.value = data.title;
+            articleField.value = data.article;
+        }else{
+            location.replace("/");
+        }
+    });
+}

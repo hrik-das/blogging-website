@@ -19,6 +19,17 @@ const setupBlog  = (data) => {
     banner.style.backgroundImage = `url(${data.bannerImage})`;
     titleTag.innerHTML += blogTitle.innerHTML = data.title;
     publish.innerHTML += data.publishedAt;
+    publish.innerHTML += ` -- ${data.author}`;
+
+    try{
+        if(data.author == auth.currentUser.email.split("@")[0]){
+            let editButton = document.getElementById("edit-blog-btn");
+            editButton.style.display = "inline";
+            editButton.href = `${blogId}/editor`;
+        }
+    }catch(error){
+        // Do Nothing Here
+    }
 
     const article = document.querySelector(".article");
     addArticle(article, data.article);
